@@ -4,8 +4,11 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { MdCurrencyExchange } from 'react-icons/md';
 
 import styles from './Header.module.css';
+import { useSelector } from 'react-redux';
+import { selectBaseCurrency } from '../../redux/selectors';
 
 const Header = () => {
+  const CurrentCurrency = useSelector(selectBaseCurrency);
   const addActive = ({ isActive }) => (isActive ? styles.active : styles.link);
   return (
     <>
@@ -27,7 +30,8 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-       //✔ Add base currency here !!!
+        {/* //✔ Add base currency here !!! */}
+        {CurrentCurrency && <p> Your base currency: {CurrentCurrency}</p>}
       </header>
       <Suspense fallback={null}>
         <Outlet />
